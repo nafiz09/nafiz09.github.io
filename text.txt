@@ -1,0 +1,4 @@
+Currently working as a Software Engineer at Spectrum Software and Consulting Ltd. at Dhaka, Bangladesh. Before beginning my career as a software engineer I completed my graduation in Computer Science and Engineering(CSE) from Bangladesh university of Engineering and Technology(BUET) in May 2023. I am currently pursuing my M.Sc. From the same university.
+
+
+In my professional life I work with Computer Vision and Document Understanding Models. Currently exploring the world where we teach machines to understand our language(NLP). My research interest lies in Applied Machine Learning and Human Computer Interaction(HCI).
