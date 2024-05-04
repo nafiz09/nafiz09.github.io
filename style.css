@@ -486,11 +486,3 @@ img {
     width: 450px;
   }
 }
-
-
-.demo_footer{
-      position: fixed;     
-       text-align: center;    
-       bottom: 0px; 
-       width: 100%;
-}
