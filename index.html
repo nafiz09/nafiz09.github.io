@@ -84,17 +84,6 @@
 
         <!--===== SCROLL REVEAL =====-->
         <script src="https://unpkg.com/scrollreveal"></script>
-        <script>
-            document.querySelectorAll("a").forEach(link => {
-              link.addEventListener("click", e => {
-                e.preventDefault();
-                const href = link.getAttribute("href");
-                if (href.endsWith(".html")) {
-                  window.location.href = href.slice(0, -5); // remove ".html"
-                }
-              });
-            });
-          </script>
 
         <!--===== MAIN JS =====-->
         <script src="main.js"></script>
