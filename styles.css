@@ -44,6 +44,7 @@ html {
 }
 
 body {
+  /* background-image: url(bg.jpg); */
   margin: var(--header-height) 0 0 0;
   font-family: var(--body-font);
   font-size: var(--normal-font-size);
@@ -396,9 +397,10 @@ img {
     bottom: 25%;
   }
   .about__container {
-    grid-template-columns: repeat(2, 1fr);
+    /* grid-template-columns: repeat(2, 1fr); */
     align-items: center;
     text-align: initial;
+    width: 50%;
   }
   .skills__container {
     grid-template-columns: 0.7fr;
@@ -492,4 +494,10 @@ img {
   margin: 0 auto;
   padding-top: 10%;
   padding-bottom: 2rem;
+}
+
+p.big {
+  line-height: 1.8;
+  font-size: 20px;
+  opacity: 80%;
 }
