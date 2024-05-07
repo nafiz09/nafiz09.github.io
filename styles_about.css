@@ -489,15 +489,15 @@ img {
   }
 }
 
-.about_me{
-  width: 60%;
-  margin: 0 auto;
-  padding-top: 10%;
-  padding-bottom: 2rem;
-}
 
 p.big {
-  line-height: 1.8;
+  line-height: 2;
   font-size: 20px;
+  opacity: 80%;
+}
+
+h2.big {
+  /* line-height: 1.8; */
+  /* font-size: 20px; */
   opacity: 80%;
 }
