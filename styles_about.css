@@ -501,3 +501,14 @@ h2.big {
   /* font-size: 20px; */
   opacity: 80%;
 }
+
+p.al{
+  text-align: right;
+  opacity: 55%;
+}
+
+ul.big {
+  line-height: 2;
+  /* font-size: 20px; */
+  /* opacity: 80%; */
+}
