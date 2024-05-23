@@ -111,7 +111,7 @@
                         <p class="big">After the command you will see a interface like this.</p>
                         <img src="rm_access/12.png">
                         <p class="big">Write this command in the nano text editor.</p>
-                        <p id="h"><strong>jupyter notebook --no-browser --ip 0.0.0.0 --port=8383 --allow-root</strong></p><button onclick="copyCode('h')">Copy</button>
+                        <p id="h"><strong>jupyter notebook --no-browser --ip 0.0.0.0 --port=(port_number) --allow-root</strong></p><button onclick="copyCode('h')">Copy</button>
                         <P class="big">Press Ctrl+s then Ctrl+x to save and exit nano. We will explain later why we are using a bash script instead of running the jupyter command from terminal.</P>
                         <p><br></p>
                         <p class="big">The breakdown of the command is,
@@ -137,14 +137,17 @@
                         <p id="j"><b>nohup bash run.sh > note.log &</b></p><button onclick="copyCode('j')">Copy</button>
                         <p class="big">Breakdown of the command is,
                             <ol>
-                                <li><strong>jupyter notebook</strong>: This is the command to start the Jupyter Notebook server, which is a web-based interactive computing platform.</li>
+                                <li><b>nohup</b>: This command stands for "no hang up." It's used to run a command or script in such a way that it continues running even after you log out or close the terminal session. It prevents the command or script from receiving the "hangup" signal (SIGHUP) that is sent to terminal-based processes when the terminal session ends.</li>
                                 <p><br></p>
-                                <li><strong>--no-browser</strong>: This option tells the Jupyter Notebook server not to attempt to open the notebook interface in a web browser automatically. This is useful if you're accessing the server remotely or if you prefer to manually open the interface later.</li>
+                                <li><b>bash run.sh</b>: This part of the command executes the shell script named <code>run.sh</code>. It assumes that <code>run.sh</code> is a Bash script (hence the <code>bash</code> command), but it could be any shell script.</li>
                                 <p><br></p>
-                                <li><strong>--port=8383</strong>: This option specifies the port number that the server will listen on. In this case, it's set to port 8383. You can choose any available port number.</li>
+                                <li><b>></b>: This symbol is used for output redirection. It redirects the standard output of the <code>bash run.sh</code> command (i.e., any text that would normally be printed to the terminal) to a file instead.</li>
                                 <p><br></p>
-                                <li><strong>--allow-root</strong>: This option allows the Jupyter Notebook server to be run by the root user. By default, Jupyter prevents running as root for security reasons, but sometimes it's necessary, especially for system-wide installations.</li>
+                                <li><b>note.log</b>: This is the name of the file where the output of the <code>bash run.sh</code> command will be redirected.</li>
+                                <p><br></p>
+                                <li><b>&</b>: This symbol is used to run the command in the background. When a command is run in the background, it does not block the terminal, allowing you to continue using the terminal for other tasks while the command is running.</li>
                             </ol>
+                            
                             
                         </p>
                         <p class="big">So, putting it all together, the command nohup bash run.sh > note.log & runs the run.sh script in the background, redirects its output to a file named note.log, and ensures that it continues running even after the current terminal session ends. If you exit the container even the remote machine, the script will be still running.</p>
