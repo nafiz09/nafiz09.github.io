@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Remote GPU from Jupyter</title>
+    <link
+            rel="icon"
+            href=
+"images/logo.png"
+            type="image/x-icon"
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="styles_about.css">
+
+        <!-- =====BOX ICONS===== -->
+        <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <title>Portfolio website complete</title>
+    </head>
+    <body>
+        <!--===== HEADER =====-->
+        <header class="l-header">
+            <nav class="nav bd-grid">
+                <div>
+                    <a href="https://nafiz09.github.io" class="nav__logo"><img src="images/logo1.png" alt="Logo" width="30" height="45"/></a>
+                </div>
+
+                <div class="nav__menu" id="nav-menu">
+                    <ul class="nav__list">
+                        <li class="nav__item"><a href="https://nafiz09.github.io/about" class="nav__link">About</a></li>
+                        <li class="nav__item"><a href="experience" class="nav__link">Work and Education</a></li>
+                        <!-- <li class="nav__item"><a href="education" class="nav__link">Education</a></li> -->
+                        <li class="nav__item"><a href="project" class="nav__link">Projects</a></li>
+                        <li class="nav__item"><a href="posts" class="nav__link active-link">Posts</a></li>
+                        <li class="nav__item"><a href="resume" target="_blank" class="nav__link">Resume</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class='bx bx-menu'></i>
+                </div>
+            </nav>
+        </header>
+
+        <main class="l-main">
+            <!--===== ABOUT =====-->
+            <!-- <section class="about_me"> -->
+                <section class="about section " id="home">
+                <div class="about__container bd-grid">                 
+                    <div>
+                        <img src="images/rm.jpg" style="height:300px;margin: 0 auto; border-radius: 10px;">
+                        <p><br></p>
+                        <p style="font-size: 40px"><strong>Use remote GPU server from Jupyter</strong></p>
+                        <p>• <i style="font-size:20px" class="fa">&#xf017;</i> 2 minutes read | • 🕮 247 words</p>
+                        <p><br></p>
+                        <p class="big">Often, we need to use a GPU with a remote connection for our daily "ML" life. In this post, we will explore how to connect your Jupyter Notebook to a remote GPU. Every command is included, along with screenshots. Follow these steps to use a remote GPU from your local machine.</p>
+                        <p><br></p>
+                        <p class="big">First lets check the GPU of our local machine. My local machine is running on <strong>windows</strong> and the remote machine I am trying to use is running on <strong>Linux</strong>. For checking the GPU in windowsm the command is,</p>
+                        <img src="rm_access/11.png">
+                        <p id="code-snippet-id"><b>wmic path win32_VideoController get name</b></p><button onclick="copyCode('code-snippet-id')">Copy</button>
+                        <p class="big">Now I will ssh into the remote machine</p>
+                        <img src="rm_access/2.png">
+                        <p id="abc"><b>ssh username@ip_address</b></p><button onclick="copyCode('abc')">Copy</button>
+                        <p class="big">Check the GPU of the remote machine</p>
+                        <img src="rm_access/3.png">
+                        <p id="a"><b>nvidia-smi</b></p><button onclick="copyCode('a')">Copy</button>
+                        <p class="big">Lets check if docker is installed properly. You will see something like this if it is properly installed.</p>
+                        <img src="rm_access/4.png">
+                        <p id="b"><b>docker</b></p><button onclick="copyCode('b')">Copy</button>
+                        <p class="big">From docker hub we will find a suitable image for our task. I am using a pytorch image for this demo purpose.</p>
+                        <img src="rm_access/5.png">
+                        <p class="big">Now lets make a container.</p>
+                        <img src="rm_access/6.png">
+                        <p id="c"><b>docker run -ti --gpus=all -p (port_number):(port_number) -v (local_directory):(docker_directory)  --name (name_of_the_container) (image_tag) bash</b></p><button onclick="copyCode('c')">Copy</button>
+                        <p class="big">As this image was previously downloaded onto the remote machine, Docker found it locally and did not need to download it again. If Docker couldn't find it locally, it would automatically download the image.</p>
+                        <p class="big"><br></p>
+                        <p class="big">Lets break down this command. 
+                            <ol>
+                                <li><strong>'docker run'</strong>: This initiates a new Docker container.</li>
+                                <br>
+                                <li><strong>'-ti'</strong>: These are flags for running the container in interactive mode (-i), and allocating a pseudo-Terminal (-t), which basically means you can interact with the container through your terminal.</li>
+                                <br>
+                                <li><strong>'--gpus=all'</strong>: This flag indicates that the container should have access to all available GPUs on the host system. It's specifying GPU resources for the container.</li>
+                                <br>
+                                <li><strong>'-p 8383:8383'</strong>: This flag maps port 8383 on the host machine to port 8383 within the Docker container. This is often used for networking, allowing processes inside the container to be accessible from the host system.</li>
+                                <br>
+                                <li><strong>'-v /home/nafiz/Downloads/remote_server/:/mount'</strong>: This flag mounts the directory '/home/nafiz/Downloads/remote_server/' from the host system to the '/mount' directory inside the container. This allows sharing files or directories between the host and the container.</li>
+                                <br>
+                                <li><strong>'--name rm_server'</strong> This flag assigns the name "rm_server" to the container.</li>
+                                <br>
+                                <li><strong>'pytorch/pytorch:1.11.0-cuda11.3-cudnn8-devel'</strong>: This is the Docker image used to create the container. It's pulling the image named pytorch/pytorch with the tag 1.11.0-cuda11.3-cudnn8-devel, which means it's a PyTorch image with CUDA version 11.3 and cuDNN version 8, suitable for development (-devel).</li>
+                                <br>
+                                <li><strong>'bash'</strong>: This specifies the command to run inside the container. In this case, it's starting an interactive Bash shell.</li>
+                                <br>
+                            </ol></p>
+                            <br>
+                        <p class="big">Update the packages of this container</p>
+                        <img src="rm_access/7.png">
+                        <p id="d"><b>apt-get update</b></p><button onclick="copyCode('d')">Copy</button>
+                        <p class="big">Install <a href="https://www.nano-editor.org/" class="nav__link"><u>nano.</u></a> Nano is a simple and user-friendly command-line text editor for Unix-like operating systems.</p>
+                        <img src="rm_access/8.png">
+                        <p id="e"><b>apt-get install nano</b></p><button onclick="copyCode('e')">Copy</button>
+                        <p class="big">Now install Jupyter. In this image jupyter notebook was not installed. Before installing anything check whether that is installed in the image or note.</p>
+                        <img src="rm_access/9.png">
+                        <p id="f"><b>pip install notebook</b></p><button onclick="copyCode('f')">Copy</button>
+                        <p class="big">now we will make a bash script to run jupyter notebook. We installed nano to make this bash script.</p>
+                        <img src="rm_access/10.png">
+                        <p id="g"><b>nano run.sh</b></p><button onclick="copyCode('g')">Copy</button>
+                        <p class="big">After the command you will see a interface like this.</p>
+                        <img src="rm_access/12.png">
+                        <p class="big">Write this command in the nano text editor.</p>
+                        <p id="h"><strong>jupyter notebook --no-browser --ip 0.0.0.0 --port=8383 --allow-root</strong></p><button onclick="copyCode('h')">Copy</button>
+                        <P class="big">Press Ctrl+s then Ctrl+x to save and exit nano. We will explain later why we are using a bash script instead of running the jupyter command from terminal.</P>
+                        <p><br></p>
+                        <p class="big">The breakdown of the command is,
+                            <ol>
+                                <li><strong>'jupyter notebook'</strong>: This is the command to start the Jupyter Notebook server, which is a web-based interactive computing platform.</li>
+                                <p><br></p>
+                                <li><strong>'--no-browser'</strong>: This option tells the Jupyter Notebook server not to attempt to open the notebook interface in a web browser automatically. This is useful if you're accessing the server remotely or if you prefer to manually open the interface later.</li>
+                                <p><br></p>
+                                <li><strong>'--ip 0.0.0.0'</strong>: This option sets the IP address that the server will listen on. In this case, <code>0.0.0.0</code> means it will listen on all available network interfaces. This allows the server to be accessed from any network interface on the machine.</li>
+                                <p><br></p>
+                                <li><strong>'--port=8383'</strong>: This option specifies the port number that the server will listen on. In this case, it's set to port 8383. You can choose any available port number.</li>
+                                <p><br></p>
+                                <li><strong>'--allow-root'</strong>: This option allows the Jupyter Notebook server to be run by the root user. By default, Jupyter prevents running as root for security reasons, but sometimes it's necessary, especially for system-wide installations.</li>
+                            </ol>
+                            
+                        </p>
+                        <p class="big">Now we will setup a password for jupyter notebook.</p>
+                        <img src="rm_access/13.png">
+                        <p id="i"><b>jupyter notebook password</b></p><button onclick="copyCode('i')">Copy</button>
+
+                        <p class="big">Run this command and press enter two times</p>
+                        <img src="rm_access/14.png">
+                        <p id="j"><b>nohup bash run.sh > note.log &</b></p><button onclick="copyCode('j')">Copy</button>
+                        <p class="big">Breakdown of the command is,
+                            <ol>
+                                <li><strong>jupyter notebook</strong>: This is the command to start the Jupyter Notebook server, which is a web-based interactive computing platform.</li>
+                                <p><br></p>
+                                <li><strong>--no-browser</strong>: This option tells the Jupyter Notebook server not to attempt to open the notebook interface in a web browser automatically. This is useful if you're accessing the server remotely or if you prefer to manually open the interface later.</li>
+                                <p><br></p>
+                                <li><strong>--port=8383</strong>: This option specifies the port number that the server will listen on. In this case, it's set to port 8383. You can choose any available port number.</li>
+                                <p><br></p>
+                                <li><strong>--allow-root</strong>: This option allows the Jupyter Notebook server to be run by the root user. By default, Jupyter prevents running as root for security reasons, but sometimes it's necessary, especially for system-wide installations.</li>
+                            </ol>
+                            
+                        </p>
+                        <p class="big">So, putting it all together, the command nohup bash run.sh > note.log & runs the run.sh script in the background, redirects its output to a file named note.log, and ensures that it continues running even after the current terminal session ends. If you exit the container even the remote machine, the script will be still running.</p>
+
+                        <p><br></p>
+                        <p class="big">Now go to your browser. Enter the ip address of the remote machine and the port number. You will see something like this.</p>
+                        <img src="rm_access/15.png">
+                        <p class="big">Enter the password you setuped earlier. If you do not setup a password, jupyter will ask for a token.</p>
+                        <img src="rm_access/16.png">
+                        <p class="big">You can get this token if you run the jupyter command from the terminal.</p>
+                        <img src="rm_access/17.png">
+                        <p class="big">But in this process the terminal won't be free. You cannot exit or traverse the directories. After entering the password you will get a interface like this.</p>
+                        <img src="rm_access/18.png">
+                        <p class="big">Create a notebook and run this code to check GPU. Make sure pytorch is installed in your image/container. In my case it was present in the image.</p>
+                        <img src="rm_access/19.png">
+                        <p id="k"><b>import torch <br> torch.cuda.get_device_name(0)</b></p><button onclick="copyCode('k')">Copy</button>
+
+                        <p><br></p>
+                        <p class="big">DONE! You are now ready to utilize the remote GPU with your local machine. You can exit the container even the exit the ssh, jupyter notebook server will be running.</p>
+
+
+
+
+                    </div>                                   
+                </div>
+            </section>
+            </main>
+
+
+        <!--===== FOOTER =====-->
+        <footer class="footer">
+            <!-- <p class="footer__title">Connect with me</p> -->
+            <p><a href="https://www.linkedin.com/in/nafiz09/"  target="_blank" class="footer__icon"><i class='bx bxl-linkedin' ></i></a>
+                <a href="https://github.com/nafiz09"  target="_blank" class="footer__icon"><i class='bx bxl-github' ></i></a>
+                <a href="https://m.me/nafiz.islam.792"  target="_blank" class="footer__icon"><i class='bx bxl-messenger' ></i></a>
+                <a href="https://wa.me/+8801717547591"  target="_blank" class="footer__icon"><i class='bx bxl-whatsapp' ></i></a><br>nafizislam09@gmail.com</p>
+            <div class="footer__social">
+                <!-- <p>nafizislam09@gmail.com</p> -->
+            </div>
+            <p class="footer__copy"></p>
+        </footer>
+
+
+        <!--===== SCROLL REVEAL =====-->
+        <script src="https://unpkg.com/scrollreveal"></script>
+
+        <!--===== MAIN JS =====-->
+        <script src="main.js"></script>
+    </body>
+</html>
