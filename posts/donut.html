@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Donut: Chatgpt of DocumentAI!</title>
+    <link
+            rel="icon"
+            href=
+"images/logo.png"
+            type="image/x-icon"
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="styles_about.css">
+
+        <!-- =====BOX ICONS===== -->
+        <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <title>Portfolio website complete</title>
+    </head>
+    <body>
+        <!--===== HEADER =====-->
+        <header class="l-header">
+            <nav class="nav bd-grid">
+                <div>
+                    <a href="https://nafiz09.github.io" class="nav__logo"><img src="images/logo1.png" alt="Logo" width="30" height="45"/></a>
+                </div>
+
+                <div class="nav__menu" id="nav-menu">
+                    <ul class="nav__list">
+                        <li class="nav__item"><a href="https://nafiz09.github.io/about" class="nav__link">About</a></li>
+                        <li class="nav__item"><a href="https://nafiz09.github.io/experience" class="nav__link">Work and Education</a></li>
+                        <!-- <li class="nav__item"><a href="education" class="nav__link">Education</a></li> -->
+                        <li class="nav__item"><a href="https://nafiz09.github.io/project" class="nav__link">Projects</a></li>
+                        <li class="nav__item"><a href="https://nafiz09.github.io/posts" class="nav__link active-link">Posts</a></li>
+                        <li class="nav__item"><a href="https://nafiz09.github.io/resume" target="_blank" class="nav__link">Resume</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class='bx bx-menu'></i>
+                </div>
+            </nav>
+        </header>
+
+        <main class="l-main">
+            <!--===== ABOUT =====-->
+            <!-- <section class="about_me"> -->
+                <section class="about section " id="home">
+                <div class="about__container bd-grid">                 
+                    <div>
+                        <img src="tmux.png" style="margin: 0 auto; border-radius: 10px;">
+                        <p><br></p>
+                        <p style="font-size: 40px"><strong>Donut: Chatgpt of DocumentAI</strong></p>
+                        <p>• <i style="font-size:20px" class="fa">&#xf017;</i> 5 minutes read | • 🕮 1124 words</p>
+                        <p><br></p>
+                        <p class="big">Visual Document Understanding (VDU) is a challenging yet crucial area of Document AI. Until Kim et al. (2021) introduced <b>Donut</b>, the entire document understanding field relied heavily on OCR (Optical Character Recognition) engines. Thanks to Vaswani et al. for introducing <a href="https://arxiv.org/abs/1706.03762">transformers and attention mechanism</a>, which have revolutionized various domains of computer science! These innovations have also impacted the Document AI domain and inspired Kim et al. to develop Donut, an <a href="https://arxiv.org/abs/2111.15664">Document Understanding Transformer</a>.</p>
+                        <p><br></p>
+                        <p class="big">Depending on the OCR engines have several problems.
+                            <ol class="big">
+                                <li>High computational costs for using OCR</li>
+                                <li>Inflexibility of OCR models on languages or types of document</li>
+                                <li>OCR error propagation to the subsequent proces</li>
+                            </ol>
+                        </p>
+                        <p class="big">Although OCR-dependent approaches have shown very promising results, these issues have hindered the ability to achieve proper accuracy. To address these issues, the authors introduced <b>Do</b>cume<b>n</b>t <b>U</b>nderstanding <b>T</b>ransformer(Donut).</p>
+                        <p><br></p>
+                        <p class="big">Donut works on document images, such as commercial invoices, receipts, and business cards. Donut is capable of performing three core tasks.
+                            <ol class="big">
+                                <li>Document classification</li>
+                                <li>Information extraction</li>
+                                <li>Visual question answering</li>
+                            </ol>
+                        </p>
+                        <img src="comparison.png">
+                        <p class="big">This comparison contrasts traditional VDU models, which typically solve tasks in two stages, with the proposed transformer-based approach that handles the problem in an end-to-end fashion. They claimed, Donut surpasses traditional OCR-based approaches in every aspect—memory usage, processing time, and accuracy.</p>
+                        <p class="big"><br></p>
+                        <p style="font-size: 25px"><strong>Model Architecture</strong></p>
+                        <p class="big">Donut follows an encoder-decoder model. It consists of transformer-based visual encoders and textual decoder modules. Here’s the twist: Donut does not directly use any OCR, but these visual encoders work like an OCR engine. In the paper, they refer to this part as pseudo-OCR. These encoders read the text from top-left to bottom-right. Thus, the term <b>OCR-free</b> in the paper means without relying on any <b>external OCR</b>.</p>
+                        <p class="big"><br></p>
+                        <p style="font-size: 20px"><strong>Encoder</strong></p>
+                        <p class="big">For the encoder part they could use CNN-based or transformer-based models. They experiemented with  ImageNet, EfficientNetV2, Vision Transformer(ViT) and Swin Transformer. They chose <a href="https://arxiv.org/abs/2103.14030"><u>Swin Transformer</u></a> due to the high scalability of the Transformer-based architecture and higher performance over the EfficientNetV2’s.</p>
+                        <p class="big"><br></p>
+                        <p class="big">The Swin Transformer initially divides the input image <i>x</i> into non-overlapping patches. These patches undergo processing in Swin Transformer blocks, which include a shifted window-based multi-head self-attention module and a two-layer MLP. Subsequently, patch merging layers combine information from patch tokens at each stage. The resulting output from the final Swin Transformer block <i>{z}</i> serves as input to the subsequent textual decoder. This is the high level of Swin Transformer.</p>
+                        <p class="big"><br></p>
+                        <p style="font-size: 20px"><strong>Decoder</strong></p>
+                        <p class="big">As the backbone of decoder module, <a href="https://arxiv.org/abs/1910.13461"><u>BART</u></a> was used. The decoder translates the embeddings into a sequence of tokens. In the autoregressive process, the decoder uses previously generated words as context to generate the next word. This approach allows the model to generate a textual representation of the input image without resorting to OCR. The output token sequence is converted to a desired structured format. They adopt a JSON format due to its high representation capacity.</p>
+                        <img src="model.png">
+                    </div>                            
+                           
+                </div>
+            </section>
+            </main>
+
+
+        <!--===== FOOTER =====-->
+        <footer class="footer">
+            <!-- <p class="footer__title">Connect with me</p> -->
+            <p><a href="https://www.linkedin.com/in/nafiz09/"  target="_blank" class="footer__icon"><i class='bx bxl-linkedin' ></i></a>
+                <a href="https://github.com/nafiz09"  target="_blank" class="footer__icon"><i class='bx bxl-github' ></i></a>
+                <a href="https://m.me/nafiz.islam.792"  target="_blank" class="footer__icon"><i class='bx bxl-messenger' ></i></a>
+                <a href="https://wa.me/+8801717547591"  target="_blank" class="footer__icon"><i class='bx bxl-whatsapp' ></i></a><br>nafizislam09@gmail.com</p>
+            <div class="footer__social">
+                <!-- <p>nafizislam09@gmail.com</p> -->
+            </div>
+            <p class="footer__copy"></p>
+        </footer>
+
+
+        <!--===== SCROLL REVEAL =====-->
+        <script src="https://unpkg.com/scrollreveal"></script>
+
+        <!--===== MAIN JS =====-->
+        <script src="main.js"></script>
+    </body>
+</html>
