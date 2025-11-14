@@ -345,12 +345,10 @@ img {
 
 /* ===== FOOTER =====*/
 .footer {
-  width: 60%;
-  margin: 0 auto;
-  background-color: rgb(255, 255, 255);
-  color: #060000;
+  width: 100%;
+  background-color: rgb(30, 30, 30);
+  color: #ffffff;
   text-align: center;
-  /* font-weight: var(--font-semi); */
   padding: 2rem 0;
 }
 .footer__title {
