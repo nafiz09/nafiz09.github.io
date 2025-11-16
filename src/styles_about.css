@@ -575,6 +575,12 @@ ul.big {
   font-weight: 600;
 }
 
+.card-item p {
+  color: #000;
+  font-size: 15px;
+  opacity: 70%;
+}
+
 .card-item .arrow {
   display: flex;
   align-items: center;
