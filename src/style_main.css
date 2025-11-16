@@ -372,6 +372,13 @@ img {
   color: #ffffff;
   margin: 0 var(--mb-2);
 }
+
+.footer__icon2 {
+  font-size: 12px;
+  opacity: 90%;
+  color: #000000;
+  margin: 0 var(--mb-2);
+}
 .footer__copy {
   font-size: var(--smaller-font-size);
 }
